@@ -1,0 +1,167 @@
+.trip-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+.trip-details-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.trip-details-header h1 {
+  color: #667eea;
+}
+
+.trip-destination {
+  font-size: 1.2em;
+  color: #666;
+  margin: 5px 0;
+}
+
+.trip-dates {
+  font-size: 1em;
+  color: #888;
+  margin: 5px 0;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.btn-back:hover {
+  text-decoration: underline;
+}
+
+.trip-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.trip-members,
+.trip-itinerary {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.trip-members h2,
+.trip-itinerary h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+.members-list {
+  list-style: none;
+  padding: 0;
+}
+
+.member-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.member-item:last-child {
+  border-bottom: none;
+}
+
+.member-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.member-joined {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.itinerary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.itinerary-item {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-date {
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.itinerary-details h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.itinerary-details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.loading,
+.error-message {
+  text-align: center;
+  padding: 50px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message p {
+  color: #d9534f;
+  margin-bottom: 20px;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}

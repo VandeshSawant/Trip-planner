@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchTripDetails } from '../services/tripService';
 import '../styles/TripDetails.css';
@@ -10,11 +10,7 @@ export default function TripDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    loadTripDetails();
-  }, [id]);
-
-  const loadTripDetails = async () => {
+  const loadTripDetails = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -26,7 +22,11 @@ export default function TripDetails() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    loadTripDetails();
+  }, [loadTripDetails]);
 
   if (loading) {
     return (

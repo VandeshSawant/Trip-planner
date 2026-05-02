@@ -2,33 +2,42 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import TripDetails from './pages/TripDetails';
+import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
 function App() {
-  // Check if user is logged in
-  const isLoggedIn = !!localStorage.getItem('userId');
-
   return (
     <Router>
       <Routes>
         {/* Login route - always accessible */}
         <Route path="/login" element={<Login />} />
 
-        {/* Protected routes will go here */}
-        {/* For now, redirect root to login */}
+        {/* Protected routes */}
         <Route
           path="/"
-          element={isLoggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
+          element={<Navigate to="/dashboard" replace />}
         />
 
-        {/* Dashboard route */}
-        <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Trip Details route */}
-        <Route path="/trip/:id" element={isLoggedIn ? <TripDetails /> : <Navigate to="/login" />} />
+        <Route
+          path="/trip/:id"
+          element={
+            <ProtectedRoute>
+              <TripDetails />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Catch-all - redirect unknown routes to login */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchUserTrips, createTrip, joinTrip } from '../services/tripService';
+import { fetchUserTrips, createTrip } from '../services/tripService';
 import CreateTripModal from './CreateTripModal';
 import '../styles/Dashboard.css';
 
@@ -31,8 +31,9 @@ export default function Dashboard() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
     navigate('/login');
   };
 
@@ -45,8 +46,8 @@ export default function Dashboard() {
     const createdTrip = await createTrip(tripData);
     const createdTripId = createdTrip.id || createdTrip.tripId;
     console.log('✅ DEBUG: Created trip ID:', createdTripId);
-    await joinTrip(createdTripId);
-    console.log('✅ DEBUG: Joined created trip');
+    // await joinTrip(createdTripId);
+    // console.log('✅ DEBUG: Joined created trip');
     // Refresh the trips list
     await loadTrips();
     console.log('✅ DEBUG: Trips list refreshed');

@@ -25,11 +25,9 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401) {
-      // Clear localStorage and redirect to /login
-      localStorage.removeItem("token");
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userName");
+    const isLoginRequest = error.config?.url === "/auth/login";
+    if (error.response?.status === 401 && !isLoginRequest) {
+      localStorage.clear();
       window.location.href = "/login";
     }
     return Promise.reject(error);

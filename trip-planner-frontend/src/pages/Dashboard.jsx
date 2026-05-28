@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { fetchUserTrips, createTrip } from '../services/tripService';
-import CreateTripModal from './CreateTripModal';
-import '../styles/Dashboard.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchUserTrips, createTrip } from "../services/tripService";
+import CreateTripModal from "./CreateTripModal";
+import "../styles/Dashboard.css";
 
 export default function Dashboard() {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const navigate = useNavigate();
 
-  // Fetch trips when component mounts
   useEffect(() => {
     loadTrips();
   }, []);
@@ -19,22 +18,22 @@ export default function Dashboard() {
   const loadTrips = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       const userTrips = await fetchUserTrips();
       setTrips(userTrips);
     } catch (err) {
-      setError('Failed to load trips. Please try again.');
-      console.error('Error loading trips:', err);
+      setError("Failed to load trips. Please try again.");
+      console.error("Error loading trips:", err);
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userName');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    navigate("/login");
   };
 
   const handleCreateTrip = () => {
@@ -42,26 +41,23 @@ export default function Dashboard() {
   };
 
   const handleTripCreated = async (tripData) => {
-    console.log('🔍 DEBUG: handleTripCreated called with:', tripData);
+    console.log("🔍 DEBUG: handleTripCreated called with:", tripData);
     const createdTrip = await createTrip(tripData);
     const createdTripId = createdTrip.id || createdTrip.tripId;
-    console.log('✅ DEBUG: Created trip ID:', createdTripId);
-    // await joinTrip(createdTripId);
-    // console.log('✅ DEBUG: Joined created trip');
-    // Refresh the trips list
+    console.log("✅ DEBUG: Created trip ID:", createdTripId);
     await loadTrips();
-    console.log('✅ DEBUG: Trips list refreshed');
+    console.log("✅ DEBUG: Trips list refreshed");
   };
 
   return (
-    <div className="dashboard">
+    <div className="dashboard-page">
       <header className="dashboard-header">
         <h1>My Trips</h1>
-        <div className="header-actions">
-          <button onClick={handleCreateTrip} className="btn-primary">
+        <div className="dashboard-header-actions">
+          <button onClick={handleCreateTrip} className="btn btn-primary">
             + Create Trip
           </button>
-          <button onClick={handleLogout} className="btn-secondary">
+          <button onClick={handleLogout} className="btn btn-secondary">
             Logout
           </button>
         </div>
@@ -69,44 +65,57 @@ export default function Dashboard() {
 
       <main className="dashboard-content">
         {loading && (
-          <div className="loading">
+          <div className="dashboard-loading">
             <div className="spinner"></div>
             <p>Loading your trips...</p>
           </div>
         )}
 
         {error && (
-          <div className="error-message">
+          <div className="dashboard-error-box">
             <p>{error}</p>
-            <button onClick={loadTrips} className="btn-secondary">
+            <button onClick={loadTrips} className="btn btn-secondary">
               Try Again
             </button>
           </div>
         )}
 
         {!loading && !error && (
-          <div className="trips-grid">
+          <div className="dashboard-trips-grid">
             {trips.length === 0 ? (
-              <div className="empty-state">
+              <div className="dashboard-empty-state">
                 <h2>No trips yet</h2>
                 <p>Create your first trip to get started!</p>
-                <button onClick={handleCreateTrip} className="btn-primary">
+                <button onClick={handleCreateTrip} className="btn btn-primary">
                   Create Your First Trip
                 </button>
               </div>
             ) : (
               trips.map((trip) => (
-                <div key={trip.id || trip.tripId} className="trip-card">
+                <div
+                  key={trip.id || trip.tripId}
+                  className="dashboard-trip-card"
+                >
                   <h3>{trip.tripName}</h3>
-                  <p className="trip-destination">{trip.destination}</p>
-                  <p className="trip-dates">
-                    {new Date(trip.startDate).toLocaleDateString('en-GB')} - {new Date(trip.endDate).toLocaleDateString('en-GB')}
+                  <p className="dashboard-trip-destination">
+                    {trip.destination}
                   </p>
-                  <div className="trip-actions">
-                    <button onClick={() => navigate(`/trip/${trip.id || trip.tripId}`)} className="btn-outline">
+                  <p className="dashboard-trip-dates">
+                    {new Date(trip.startDate).toLocaleDateString("en-GB")} -{" "}
+                    {new Date(trip.endDate).toLocaleDateString("en-GB")}
+                  </p>
+                  <div className="dashboard-trip-actions">
+                    <button
+                      onClick={() =>
+                        navigate(`/trip/${trip.id || trip.tripId}`)
+                      }
+                      className="dashboard-card-btn-primary"
+                    >
                       View Details
                     </button>
-                    <button className="btn-outline">Manage Members</button>
+                    <button className="dashboard-card-btn-secondary">
+                      Manage Members
+                    </button>
                   </div>
                 </div>
               ))

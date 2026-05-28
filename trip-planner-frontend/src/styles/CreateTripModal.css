@@ -1,158 +1,135 @@
-.modal-overlay {
+.create-trip-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1.5rem;
 }
 
-.modal-content {
-  background: white;
-  border-radius: 12px;
+.create-trip-modal-content {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
   padding: 0;
   width: 100%;
-  max-width: 500px;
+  max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
-.modal-header {
+.create-trip-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.modal-header h2 {
+.create-trip-modal-header h2 {
   margin: 0;
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #6b7280;
+.create-trip-close-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
   cursor: pointer;
-  padding: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  transition: all 0.2s;
 }
 
-.close-btn:hover:not(:disabled) {
-  background: #f3f4f6;
-  color: #374151;
+.create-trip-close-btn:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--accent-blue);
 }
 
-.close-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.modal-content form {
+.create-trip-modal-content form {
   padding: 2rem;
 }
 
-.form-group {
+.create-trip-form-group {
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.create-trip-form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #374151;
+  color: var(--text-primary);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
-.form-group input {
+.create-trip-form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #e5e7eb;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
+  background: var(--bg-secondary);
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #667eea;
-}
-
-.form-group input:disabled {
-  background: #f9fafb;
+.create-trip-form-group input:disabled {
+  background: #0f172a;
+  opacity: 0.85;
   cursor: not-allowed;
 }
 
-.form-row {
+.create-trip-form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
-.error-message {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #dc2626;
+.create-trip-error-message {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: var(--error-color);
   padding: 0.75rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
 }
 
-.modal-actions {
+.create-trip-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e5e7eb;
+  padding: 1rem 2rem 2rem;
+  border-top: 1px solid var(--border-color);
 }
 
-.btn-primary:disabled,
-.btn-secondary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.create-trip-actions button {
+  width: auto;
+  min-width: 140px;
 }
 
-/* Responsive design */
 @media (max-width: 640px) {
-  .modal-content {
-    margin: 1rem;
-    max-width: none;
+  .create-trip-modal-content {
+    max-width: 100%;
   }
 
-  .modal-header,
-  .modal-content form {
+  .create-trip-modal-header,
+  .create-trip-modal-content form {
     padding: 1.5rem;
   }
 
-  .form-row {
+  .create-trip-form-row {
     grid-template-columns: 1fr;
-    gap: 0;
   }
 
-  .modal-actions {
+  .create-trip-actions {
     flex-direction: column-reverse;
   }
 
-  .modal-actions button {
+  .create-trip-actions button {
     width: 100%;
   }
 }
